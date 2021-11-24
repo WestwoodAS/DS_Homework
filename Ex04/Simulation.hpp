@@ -23,8 +23,7 @@ public:
 	~Simulation() { // destructor
 		delete jobs;
 		delete answer;
-		delete allQ;
-		delete qNum;
+		allQ.clearQ();
 	} // end destructor
 	void SQF(); // shortest queue first
 
