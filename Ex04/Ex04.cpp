@@ -3,13 +3,46 @@
 #include <string.h>
 #include <algorithm>
 #include "JobList.hpp" // type jobType, class JobList
-#include "JobQueue.hpp" // class JobQueue
-#include "AnsList.hpp" // class AnsList
-#include "Simulation.hpp" // class Simulation
+//#include "JobQueue.hpp" // class JobQueue
+//#include "AnsList.hpp" // class AnsList
+//#include "Simulation.hpp" // class Simulation
 
 #define MAX_LEN 255 
 
 using namespace std;
+
+int getM();
+
+bool JobList::getSorted() {
+	FILE *infile = NULL;
+	
+	string fileName;
+	bool success = false ;
+	cin >> fileName;
+
+	fileName = "input"+fileName+".txt";
+	infile = fopen(fileName.c_str(), "r");
+	
+	if (infile == NULL)
+		cout<<endl<<fileName<<"does not exist!"<<endl ;
+	else {	
+		jobType type;
+		string temp;
+		fscanf(infile,"%s %s %s %s", &temp, &temp, &temp, &temp);
+		
+		while(fscanf(infile,"%d", &type.OID) != EOF) {	
+			fscanf(infile,"%d", &type.arrival);
+			fscanf(infile,"%d", &type.duration);
+			fscanf(infile,"%d", &type.timeout);
+			cout << type.timeout << endl;
+			aList.push_back( type );
+		}//end while
+		
+		fclose(infile);
+	}//end else
+	return success;
+
+} // end JobList::getAll
 
 
 int main(void) {
@@ -17,7 +50,7 @@ int main(void) {
 	
 	do
 	{	
-	
+		JobList jobs;
 		cout<<endl<<"*Arithmetic Expression Evaluator*";
 		cout<<endl<<"*0.QUIT                         *";
 		cout<<endl<<"*1.Infix2postfix Evaluation     *";
@@ -27,11 +60,8 @@ int main(void) {
 		cin.ignore(MAX_LEN, '\n');
 		switch(command)
 		{	case 0:break;
-			case 1:cout<<endl<<"Input an infix expression : ";
-				getline(cin,infixS);
-				
-
-
+			case 1:cout<<endl<<"Input a file : ";
+				jobs.getSorted();
 				break;
 			default:cout<<endl<<"Command does not exist!"<<endl;
 			 

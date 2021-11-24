@@ -17,13 +17,13 @@ typedef struct jT {
 } jobType; 
 
 class JobList {
-	vector<jobType> aList;
-	string fileID;
+	std::vector<jobType> aList;
+	std::string fileID;
 	
 	void reset() {aList.clear();} // end reset
 	void showJob(jobType &);
 	void sortByArrival();
-	void putAll();
+	void putAll(); // write all as a file
 	void showTime();
 	void nextJobCheck(jobType &nextJob) { nextJob = aList.front(); } // get the next job without removal
 	
@@ -31,10 +31,11 @@ public:
 	JobList(){ reset(); }
 	~JobList() { reset(); }
 	
-	bool isEmpty() { return aList == NULL; } // check if it is empty
+	bool isEmpty() { return aList.empty(); } // check if it is empty
 
-	bool getAll(string); // read all from a file;
+	bool getAll(std::string); // read all from a file;
 	bool getSorted(); // read all from a file and sort them
-	void nextJob(jobType &) // get and remove the next job
+	void nextJob(jobType &); // get and remove the next job
+	
 }; // end JobList
 #endif //_JobLIST_HPP
