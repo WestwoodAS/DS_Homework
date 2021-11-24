@@ -24,7 +24,7 @@ class JobList {
 	void showJob();
 	void sortByArrival();
 	void putAll(); // write all as a file
-	void showTime();
+	void showTime(); // output time on screen
 	void nextJobCheck(jobType &nextJob) { nextJob = aList.front(); } // get the next job without removal
 	
 public:

@@ -40,7 +40,6 @@ bool JobList::getSorted() {
 			aList.push_back( job );
 		}//end while
 		
-		showJob();
 		
 		fclose(infile);
 	}//end else
