@@ -21,7 +21,7 @@ class JobList {
 	std::string fileID;
 	
 	void reset() {aList.clear();} // end reset
-	void showJob(jobType &);
+	void showJob();
 	void sortByArrival();
 	void putAll(); // write all as a file
 	void showTime();

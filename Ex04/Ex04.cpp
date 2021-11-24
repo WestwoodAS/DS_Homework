@@ -40,6 +40,8 @@ bool JobList::getSorted() {
 			aList.push_back( job );
 		}//end while
 		
+		showJob();
+		
 		fclose(infile);
 	}//end else
 	return success;
@@ -81,6 +83,13 @@ bool JobList::getAll() {
 void JobList::nextJob(jobType &nextJob) { // get the next job then remove it
 	nextJob = aList.front();
 	aList.erase(aList.begin());
+} // end JobList::nextJob
+
+void JobList::showJob() { // show the job list 
+	for ( int i = 0 ; i < aList.size() ; i++ ) {
+		cout << aList[i].OID << ' ' << aList[i].arrival << ' ';
+		cout << aList[i].duration << ' ' << aList[i].timeout << endl;
+	} // end for
 } // end JobList::nextJob
 
 
