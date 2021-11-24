@@ -16,9 +16,16 @@ class Simulation {
 	void finishQ(); // finish the remaining jobs in queue
 	
 public:
-	Simulation( JobList aList, int N ):jobs(aList),qNum(N) // copy constructor
-
-	~Simulation() // destructor
+	Simulation( JobList aList, int N ):jobs(aList),qNum(N) { // copy constructor
+		allQ.clearQ();
+	} // end constructor
+	
+	~Simulation() { // destructor
+		delete jobs;
+		delete answer;
+		delete allQ;
+		delete qNum;
+	} // end destructor
 	void SQF(); // shortest queue first
 
 }; // end Simulation

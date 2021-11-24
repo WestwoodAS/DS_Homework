@@ -3,14 +3,15 @@
 
 class AnsList{ 
 	typedef struct aT {
-	
-	
-	
+		int OID;
+		int abort; // abort time
+		int delay;
 	} abortType;
 	
 	typedef struct dT {
-	
-	
+		int OID;
+		int departure; // departure time
+		int delay;
 	} doneType;
 	vector<abortType> abortJobs;
 	vector<doneType> doneJobs;
@@ -24,10 +25,12 @@ class AnsList{
 	
 public:
 	AnsList():avgDelay(0,0), successRate(0,0) { // constructor for initialzation
-	
+		abortJobs.clear();
+		doneJobs.clear();
 	} // end AnsList
 	~AnsList() {
-	
+		abortJobs.clear();
+		doneJobs.clear();
 	} // destructor for initialzation
 	void showAll(string);
 	void addAbortJob( int, int, int, int ); // add one aborted job
