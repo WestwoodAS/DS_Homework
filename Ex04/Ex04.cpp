@@ -27,15 +27,17 @@ bool JobList::getSorted() {
 	if (infile == NULL)
 		cout<<endl<<fileName<<"does not exist!"<<endl ;
 	else {	
+	
 		char *title = (char*)malloc(sizeof(char));
-		fscanf(infile, "%[^\n] ", title);
-		jobType type;
+		fscanf(infile, "%[^\n] ", title); // remove title
 		
-		while(fscanf(infile,"%d", &type.OID) != EOF) {	
-			fscanf(infile,"%d", &type.arrival);
-			fscanf(infile,"%d", &type.duration);
-			fscanf(infile,"%d", &type.timeout);
-			aList.push_back( type );
+		jobType job;
+		
+		while(fscanf(infile,"%d", &job.OID) != EOF) {	
+			fscanf(infile,"%d", &job.arrival);
+			fscanf(infile,"%d", &job.duration);
+			fscanf(infile,"%d", &job.timeout);
+			aList.push_back( job );
 		}//end while
 		
 		fclose(infile);
@@ -57,15 +59,17 @@ bool JobList::getAll() {
 	if (infile == NULL)
 		cout<<endl<<fileName<<"does not exist!"<<endl ;
 	else {	
+	
 		char *title = (char*)malloc(sizeof(char));
-		fscanf(infile, "%[^\n] ", title);
-		jobType type;
+		fscanf(infile, "%[^\n] ", title); // remove title
 		
-		while(fscanf(infile,"%d", &type.OID) != EOF) {	
-			fscanf(infile,"%d", &type.arrival);
-			fscanf(infile,"%d", &type.duration);
-			fscanf(infile,"%d", &type.timeout);
-			aList.push_back( type );
+		jobType job;
+		
+		while(fscanf(infile,"%d", &job.OID) != EOF) {	
+			fscanf(infile,"%d", &job.arrival);
+			fscanf(infile,"%d", &job.duration);
+			fscanf(infile,"%d", &job.timeout);
+			aList.push_back( job );
 		}//end while
 		
 		fclose(infile);
@@ -73,6 +77,11 @@ bool JobList::getAll() {
 	return success;
 
 } // end JobList::getAll
+
+void JobList::nextJob(jobType &nextJob) { // get the next job then remove it
+	nextJob = aList.front();
+	aList.erase(aList.begin());
+} // end JobList::nextJob
 
 
 int main(void) {
