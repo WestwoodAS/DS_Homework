@@ -42,6 +42,36 @@ bool JobList::getSorted() {
 	}//end else
 	return success;
 
+} // end JobList::getSorted
+
+bool JobList::getAll() {
+	FILE *infile = NULL;
+	
+	string fileName;
+	bool success = false ;
+	cin >> fileName;
+
+	fileName = "sorted"+fileName+".txt";
+	infile = fopen(fileName.c_str(), "r");
+	
+	if (infile == NULL)
+		cout<<endl<<fileName<<"does not exist!"<<endl ;
+	else {	
+		char *title = (char*)malloc(sizeof(char));
+		fscanf(infile, "%[^\n] ", title);
+		jobType type;
+		
+		while(fscanf(infile,"%d", &type.OID) != EOF) {	
+			fscanf(infile,"%d", &type.arrival);
+			fscanf(infile,"%d", &type.duration);
+			fscanf(infile,"%d", &type.timeout);
+			aList.push_back( type );
+		}//end while
+		
+		fclose(infile);
+	}//end else
+	return success;
+
 } // end JobList::getAll
 
 

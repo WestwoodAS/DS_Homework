@@ -33,7 +33,7 @@ public:
 	
 	bool isEmpty() { return aList.empty(); } // check if it is empty
 
-	bool getAll(std::string); // read all from a file;
+	bool getAll(); // read all from a file;
 	bool getSorted(); // read all from a file and sort them
 	void nextJob(jobType &); // get and remove the next job
 	
