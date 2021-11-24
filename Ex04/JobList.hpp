@@ -22,7 +22,36 @@ class JobList {
 	
 	void reset() {aList.clear();} // end reset
 	void showJob();
-	void sortByArrival();
+	void sortByArrival(){
+        int gap = 0;
+        jobType temp;
+        gap = aList.size() / 2 ;
+        while( gap > 0 ) {
+            for( int k = 0 ;  k < gap ; k++ ) {
+
+                for( int i = k+gap ; i < aList.size() ; i = i+gap ) {
+                    for( int j = i-gap ; j >= k ; j = j-gap) {
+                        if( aList[j].arrival > aList[j+gap].arrival  ) {
+                            temp = aList[j];
+                            aList[j] = aList[j+gap];
+                            aList[j+gap] = temp;
+                        } // end if
+                        else if ( aList[j].arrival == aList[j+gap].arrival ) {
+                        	if ( aList[j].OID > aList[j+gap].OID ) {
+                        		temp = aList[j];
+	                            aList[j] = aList[j+gap];
+	                            aList[j+gap] = temp;
+							} // end if
+						} // end else if
+                    } // end for
+                } // end for
+            } // end for
+
+            gap = gap / 2 ;
+
+        } // end while
+
+    }//end of sortByArrival
 	void putAll(); // write all as a file
 	void showTime(); // output time on screen
 	void nextJobCheck(jobType &nextJob) { nextJob = aList.front(); } // get the next job without removal

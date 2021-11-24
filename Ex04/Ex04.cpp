@@ -20,6 +20,7 @@ bool JobList::getSorted() {
 	string fileName;
 	bool success = false ;
 	cin >> fileName;
+	fileID = fileName;
 
 	fileName = "input"+fileName+".txt";
 	infile = fopen(fileName.c_str(), "r");
@@ -40,7 +41,8 @@ bool JobList::getSorted() {
 			aList.push_back( job );
 		}//end while
 		
-		
+		sortByArrival();
+		putAll(); 
 		fclose(infile);
 	}//end else
 	return success;
@@ -89,8 +91,19 @@ void JobList::showJob() { // show the job list
 		cout << aList[i].OID << ' ' << aList[i].arrival << ' ';
 		cout << aList[i].duration << ' ' << aList[i].timeout << endl;
 	} // end for
-} // end JobList::nextJob
+} // end JobList::showJob
 
+void JobList::putAll() { // show the job list 
+	FILE *outfile = NULL;
+	string filename = "sorted"+fileID+".txt";
+	outfile = fopen(filename.c_str(), "a");
+	for ( int i = 0 ; i < aList.size() ; i++ ) {
+		fprintf(outfile, "%d %d %d %d", aList[i].OID, aList[i].arrival, aList[i].duration, aList[i].timeout );
+		fprintf(outfile, "%c", '\n');
+	} // end for
+
+   	fclose(outfile);
+} // end JobList::putAll
 
 int main(void) {
 	int command = 0;
