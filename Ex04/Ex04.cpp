@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <cstdlib>
 #include <string.h>
 #include <algorithm>
@@ -26,15 +27,14 @@ bool JobList::getSorted() {
 	if (infile == NULL)
 		cout<<endl<<fileName<<"does not exist!"<<endl ;
 	else {	
+		char *title = (char*)malloc(sizeof(char));
+		fscanf(infile, "%[^\n] ", title);
 		jobType type;
-		string temp;
-		fscanf(infile,"%s %s %s %s", &temp, &temp, &temp, &temp);
 		
 		while(fscanf(infile,"%d", &type.OID) != EOF) {	
 			fscanf(infile,"%d", &type.arrival);
 			fscanf(infile,"%d", &type.duration);
 			fscanf(infile,"%d", &type.timeout);
-			cout << type.timeout << endl;
 			aList.push_back( type );
 		}//end while
 		
