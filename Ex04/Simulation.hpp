@@ -5,10 +5,11 @@
 #include "JobQueue.hpp" // class JobQueue
 #include "AnsList.hpp" // class AnsList
 
+
 class Simulation {
 	JobList jobs; // a list of jobs
 	AnsList answer; // a set of answers
-	JobQueue< jobType > **allQ; // a set of queues
+	JobQueue<jobType> **allQ; // a set of queues
 	int qNum; // number of queues
 	
 	void delQ(int); // delete an old job from a queue
@@ -17,15 +18,14 @@ class Simulation {
 	
 public:
 	Simulation( JobList aList, int N ):jobs(aList),qNum(N) { // copy constructor
-		allQ.clearQ();
+		delete allQ;
 	} // end constructor
 	
 	~Simulation() { // destructor
-		delete jobs;
-		delete answer;
-		allQ.clearQ();
+		delete allQ;
 	} // end destructor
 	void SQF(); // shortest queue first
 
 }; // end Simulation
 #endif // _Simulation_HPP
+

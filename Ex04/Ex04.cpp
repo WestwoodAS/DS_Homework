@@ -4,9 +4,9 @@
 #include <string.h>
 #include <algorithm>
 #include "JobList.hpp" // type jobType, class JobList
-//#include "JobQueue.hpp" // class JobQueue
-//#include "AnsList.hpp" // class AnsList
-//#include "Simulation.hpp" // class Simulation
+#include "JobQueue.hpp" // class JobQueue
+#include "AnsList.hpp" // class AnsList
+#include "Simulation.hpp" // class Simulation
 
 #define MAX_LEN 255 
 
@@ -29,8 +29,7 @@ bool JobList::getSorted() {
 		cout<<endl<<fileName<<"does not exist!"<<endl ;
 	else {	
 	
-		char *title = (char*)malloc(sizeof(char));
-		fscanf(infile, "%[^\n] ", title); // remove title
+		fscanf(infile, "%*[^\n]\n"); // remove title
 		
 		jobType job;
 		
@@ -42,8 +41,11 @@ bool JobList::getSorted() {
 		}//end while
 		
 		sortByArrival();
-		putAll(); 
+		putAll();
+		
 		fclose(infile);
+		
+		success = true;
 	}//end else
 	return success;
 
@@ -76,6 +78,8 @@ bool JobList::getAll() {
 		}//end while
 		
 		fclose(infile);
+		
+		success = true;
 	}//end else
 	return success;
 
@@ -87,9 +91,12 @@ void JobList::nextJob(jobType &nextJob) { // get the next job then remove it
 } // end JobList::nextJob
 
 void JobList::showJob() { // show the job list 
+	cout << "        OID     Arrival Duration        TimeOut\n";
+
 	for ( int i = 0 ; i < aList.size() ; i++ ) {
-		cout << aList[i].OID << ' ' << aList[i].arrival << ' ';
-		cout << aList[i].duration << ' ' << aList[i].timeout << endl;
+		cout << '(' << i + 1 << ')' << "     ";
+		cout << aList[i].OID << "     " << aList[i].arrival << "     ";
+		cout << aList[i].duration << "     " << aList[i].timeout << endl;
 	} // end for
 } // end JobList::showJob
 
@@ -97,6 +104,7 @@ void JobList::putAll() { // show the job list
 	FILE *outfile = NULL;
 	string filename = "sorted"+fileID+".txt";
 	outfile = fopen(filename.c_str(), "a");
+	fprintf(outfile, "%s", "OID	Arrival	Duration	TimeOut\n" );
 	for ( int i = 0 ; i < aList.size() ; i++ ) {
 		fprintf(outfile, "%d %d %d %d", aList[i].OID, aList[i].arrival, aList[i].duration, aList[i].timeout );
 		fprintf(outfile, "%c", '\n');
@@ -113,16 +121,26 @@ int main(void) {
 		JobList jobs;
 		cout<<endl<<"*Arithmetic Expression Evaluator*";
 		cout<<endl<<"*0.QUIT                         *";
-		cout<<endl<<"*1.Infix2postfix Evaluation     *";
+		cout<<endl<<"*1.Sort Job List                *";
+		cout<<endl<<"*2.Queue Job List               *";
 		cout<<endl<<"*********************************";
-		cout<<endl<<"Input a choice(0,1) : ";
+		cout<<endl<<"Input a choice(0,1,2) : ";
 		command = getM();
 		cin.ignore(MAX_LEN, '\n');
 		switch(command)
 		{	case 0:break;
 			case 1:cout<<endl<<"Input a file : ";
-				jobs.getSorted();
+				if(jobs.getSorted())jobs.showJob();
 				break;
+			
+			case 2:cout<<endl<<"Input a file : ";
+				if(jobs.getAll()) {
+					Simulation cpu( jobs, 1 );
+					jobs.showJob();
+					// cpu.SQF();
+				} // end if
+				break;
+			
 			default:cout<<endl<<"Command does not exist!"<<endl;
 			 
 		}//end switch

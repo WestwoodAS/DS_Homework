@@ -21,7 +21,6 @@ class JobList {
 	std::string fileID;
 	
 	void reset() {aList.clear();} // end reset
-	void showJob();
 	void sortByArrival(){
         int gap = 0;
         jobType temp;
@@ -64,6 +63,7 @@ public:
 
 	bool getAll(); // read all from a file;
 	bool getSorted(); // read all from a file and sort them
+	void showJob(); // show job on screen
 	void nextJob(jobType &); // get and remove the next job
 	
 }; // end JobList

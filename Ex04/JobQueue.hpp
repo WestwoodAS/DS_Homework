@@ -34,7 +34,7 @@ public:
 	void getFront( T &oldItem ) const { oldItem = cA[qFront]; } // get the first element
 	void deQueue() { // drop the first element
 		qSize--; // decrease queue size
-		qFront = new(qFront); // locate the first element
+		qFront = next(qFront); // locate the first element
 	} // end deQueue
 	
 	void deQueue( T &oldItem ) { // get then drop the first element
