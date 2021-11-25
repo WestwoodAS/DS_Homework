@@ -11,7 +11,7 @@ class JobQueue {
 	int prev( int idx ) { return (( idx + qMax - 1 ) % qMax); } // move to previous pos
 
 public:
-	int avail;
+	int avail; // the time when CPU is available
 	JobQueue():cA(NULL), qFront(0), qBack(0), 
 		qSize(0), qMax(0), avail(0) {} // constructor of no-space queue
 		

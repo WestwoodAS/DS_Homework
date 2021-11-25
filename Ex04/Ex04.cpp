@@ -139,6 +139,16 @@ void AnsList::addAbortJob( int OID, int arrival, int timeout, int cpuTime ) { //
 	abortJobs.push_back(job);
 } // end AnsList::addAbortJob
 
+void Simulation::SQF() { // shortest queue first
+
+	allQ = new JobQueue<jobType> * [qNum]; // create qNum of cpu
+	for (size_t i = 0; i < qNum; i++) { // create queue for each cpu                       
+        allQ[i] = new JobQueue<jobType>(3);                                                                     
+    } // end for
+    
+    
+} // end Simulation::SQF
+
 int main(void) {
 	int command = 0;
 	
