@@ -33,7 +33,7 @@ public:
 		abortJobs.clear();
 		doneJobs.clear();
 	} // destructor for initialzation
-	void showAll(std::string);
+	void showAll();
 	void addAbortJob( int, int, int, int ); // add one aborted job
 	void addDoneJob( int, int, int, int ); // add one done job
 	

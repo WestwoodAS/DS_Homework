@@ -113,6 +113,32 @@ void JobList::putAll() { // show the job list
    	fclose(outfile);
 } // end JobList::putAll
 
+void AnsList::putAll( string fileName, string test ) { // show the job list 
+	FILE *outfile = NULL;
+	string filename = "output"+fileName+".txt";
+	outfile = fopen(filename.c_str(), "a");
+	fprintf(outfile, "%s", "OID	Arrival	Duration	TimeOut\n" );
+
+
+   	fclose(outfile);
+} // end AnsList::putAll
+
+void AnsList::showAll() { // show the job list 
+	cout << "        OID     Arrival Duration        TimeOut\n";
+} // end AnsList::showAll
+
+void AnsList::addDoneJob( int OID, int arrival, int duration, int cpuTime ) { // show the job list 
+	doneType job;
+	job.OID = OID, job.departure = cpuTime+duration, job.delay = cpuTime - arrival;
+	doneJobs.push_back(job);
+} // end AnsList::addDoneJob
+
+void AnsList::addAbortJob( int OID, int arrival, int timeout, int cpuTime ) { // show the job list 
+	abortType job;
+	job.OID = OID, job.abort = cpuTime, job.delay = cpuTime - arrival;
+	abortJobs.push_back(job);
+} // end AnsList::addAbortJob
+
 int main(void) {
 	int command = 0;
 	
@@ -136,7 +162,6 @@ int main(void) {
 			case 2:cout<<endl<<"Input a file : ";
 				if(jobs.getAll()) {
 					Simulation cpu( jobs, 1 );
-					jobs.showJob();
 					// cpu.SQF();
 				} // end if
 				break;
