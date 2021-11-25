@@ -146,6 +146,19 @@ void Simulation::SQF() { // shortest queue first
         allQ[i] = new JobQueue<jobType>(3);                                                                     
     } // end for
     
+    int cpuTime = 0;
+    
+    jobType nextJob;
+    jobs.nextJob(nextJob);
+
+	
+    while ( !jobs.isEmpty() ) {
+    	for (size_t i = 0; i < qNum; i++) { // create queue for each cpu                       
+        	allQ[i]->enQueue(nextJob);                                                                     
+    	} // end for
+    	cpuTime++;
+	} // end while
+	
     
 } // end Simulation::SQF
 

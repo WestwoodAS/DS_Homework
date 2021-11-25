@@ -22,8 +22,8 @@ public:
 	} // end constructor
 	
 	int length() const { return qSize; } // return current queue length
-	int isEmpty() const { return (qSize == 0); } // check if queue is empty
-	int isFull() const { return (qSize == qMax); } // check if queue is empty
+	bool isEmpty() const { return (qSize == 0); } // check if queue is empty
+	bool isFull() const { return (qSize == qMax); } // check if queue is empty
 	
 	void enQueue( T &newItem ) { // append a new element
 		qSize++; // increase queue length

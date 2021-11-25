@@ -18,7 +18,7 @@ class Simulation {
 	
 public:
 	Simulation( JobList aList, int N ):jobs(aList),qNum(N) { // copy constructor
-		delete allQ;
+
 	} // end constructor
 	
 	~Simulation() { // destructor
